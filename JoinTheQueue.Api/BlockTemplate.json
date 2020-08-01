@@ -1,0 +1,60 @@
+{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Hi David :wave:"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "• Schedule meetings \n • Manage and update attendees \n • Get notified about changes of your meetings"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Join",
+            "emoji": true
+          },
+          "value": "click_me_123"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Leave",
+            "emoji": true
+          },
+          "value": "click_me_123"
+        },
+        {
+          "type": "overflow",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Nudge the Leader",
+                "emoji": true
+              },
+              "value": "value-0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
