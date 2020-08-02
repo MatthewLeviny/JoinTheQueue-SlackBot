@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Repository;
 
 namespace JoinTheQueue.Infrastructure.Database
@@ -11,7 +12,12 @@ namespace JoinTheQueue.Infrastructure.Database
             throw new System.NotImplementedException();
         }
 
-        public Task<object> UpdateQueue(string chanelId, string enterpriseId)
+        public Task<QueueDto> UpdateQueue(QueueDto queue)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Task<QueueDto> IQueueDatabase.GetQueue(string chanelId, string enterpriseId)
         {
             throw new System.NotImplementedException();
         }
