@@ -8,7 +8,7 @@ namespace JoinTheQueue.Core.Services
     public interface IManageServices
     {
         Task<SlackResponseDto> CreateQueueForChannel(SlashRequest request);
-        Task<SlackResponseDto> NudgeTheLeader(SlashRequest body);
+
     }
 
     public class ManageServices : IManageServices
@@ -43,11 +43,6 @@ namespace JoinTheQueue.Core.Services
                 response_type = BasicResponseTypes.in_channel,
                 text = JsonConvert.SerializeObject(block)
             };
-        }
-
-        public Task<SlackResponseDto> NudgeTheLeader(SlashRequest body)
-        {
-            throw new System.NotImplementedException();
         }
 
         private QueueBlockDto ConstructResponse()

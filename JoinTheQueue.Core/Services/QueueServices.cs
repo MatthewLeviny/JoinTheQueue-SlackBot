@@ -9,6 +9,7 @@ namespace JoinTheQueue.Core.Services
     {
         Task<SlackResponseDto> JoinQueue(SlashRequest request);
         Task<SlackResponseDto> LeaveQueue(SlashRequest request);
+        Task<SlackResponseDto> NudgeTheLeader(SlashRequest body);
     }
 
     public class QueueServices : IQueueServices
@@ -64,6 +65,11 @@ namespace JoinTheQueue.Core.Services
                        $"@{queue.Queue.Peek()} ITS GO TIME",
                 response_type = BasicResponseTypes.in_channel
             };
+        }
+
+        public Task<SlackResponseDto> NudgeTheLeader(SlashRequest body)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

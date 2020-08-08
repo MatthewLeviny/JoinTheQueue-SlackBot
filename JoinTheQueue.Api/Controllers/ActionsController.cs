@@ -1,36 +1,39 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using JoinTheQueue.Core.Authentication;
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JoinTheQueue.Api.Controllers
 {
     /// <summary>
-    /// Controller to deal with management from slash command
+    /// Controller to deal with actions from blocks
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [RequestAuth]
-    public class ManageController : Controller
+    public class ActionsController : ControllerBase
     {
-        private readonly IManageServices _manageServices;
+        private readonly IQueueServices _queueServices;
 
-        public ManageController(IManageServices manageServices)
+        public ActionsController(IQueueServices queueServices)
         {
-            this._manageServices = manageServices;
+            _queueServices = queueServices;
         }
 
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
-        [Route("AddQueue")]
+        [Route("Nudge")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> InitialiseQueue([FromForm] SlashRequest body)
+        public async Task<IActionResult> NudgeTheLeader([FromForm] SlashRequest body)
         {
-            var returnMessage = await _manageServices.CreateQueueForChannel(body);
+            var returnMessage = await _queueServices.NudgeTheLeader(body);
             return Ok(returnMessage);
         }
     }
