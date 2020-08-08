@@ -3,6 +3,7 @@ using JoinTheQueue.Core.Authentication;
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace JoinTheQueue.Api.Controllers
 {
@@ -22,6 +23,8 @@ namespace JoinTheQueue.Api.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         [Route("AddQueue")]
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> InitialiseQueue([FromForm] SlashRequest body)
         {
             var returnMessage = await _manageServices.CreateQueueForChannel(body);
@@ -32,6 +35,8 @@ namespace JoinTheQueue.Api.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         [Route("Nudge")]
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> NudgeTheLeader([FromForm] SlashRequest body)
         {
             var returnMessage = await _manageServices.NudgeTheLeader(body);

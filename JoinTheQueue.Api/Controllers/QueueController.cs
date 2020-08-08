@@ -2,6 +2,7 @@
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace JoinTheQueue.Api.Controllers
 {
@@ -20,6 +21,8 @@ namespace JoinTheQueue.Api.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         [Route("Join")]
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> JoinTheQueue([FromForm] SlashRequest body)
         {
             var returnMessage = await _queueServices.JoinQueue(body);
@@ -30,6 +33,8 @@ namespace JoinTheQueue.Api.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         [Route("Leave")]
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LeaveTheQueue([FromForm] SlashRequest body)
         {
             var returnMessage = await _queueServices.LeaveQueue(body);
