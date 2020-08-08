@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JoinTheQueue.Core.Authentication;
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
@@ -13,7 +10,8 @@ namespace JoinTheQueue.Api.Controllers
     /// <summary>
     /// Controller to deal with actions from blocks
     /// </summary>
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/{v:apiVersion}/[controller]")]
     [ApiController]
     [RequestAuth]
     public class ActionsController : ControllerBase

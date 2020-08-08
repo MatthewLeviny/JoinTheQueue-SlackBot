@@ -10,7 +10,8 @@ namespace JoinTheQueue.Api.Controllers
     /// <summary>
     /// Controller to deal with actions from slash commands
     /// </summary>
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/{v:apiVersion}/[controller]")]
     [ApiController]
     [RequestAuth]
     public class QueueController : ControllerBase
