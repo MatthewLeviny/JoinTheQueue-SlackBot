@@ -2,8 +2,8 @@
 {
     public enum BlockTypes
     {
-        Section,
-        Divider,
-        Actions
+        section,
+        divider,
+        actions
     }
 }

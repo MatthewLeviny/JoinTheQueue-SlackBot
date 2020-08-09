@@ -12,6 +12,8 @@ namespace JoinTheQueue.Api.Controllers
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/{v:apiVersion}/[controller]")]
+    [Produces("application/json")]
+    [Consumes("application/x-www-form-urlencoded")]
     [ApiController]
     [RequestAuth]
     public class QueueController : ControllerBase
@@ -24,9 +26,7 @@ namespace JoinTheQueue.Api.Controllers
         }
 
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
         [Route("Join")]
-        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> JoinTheQueue([FromForm] SlashRequest body)
@@ -36,9 +36,7 @@ namespace JoinTheQueue.Api.Controllers
         }
 
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
         [Route("Leave")]
-        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LeaveTheQueue([FromForm] SlashRequest body)
@@ -48,9 +46,7 @@ namespace JoinTheQueue.Api.Controllers
         }
 
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
         [Route("Nudge")]
-        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> NudgeTheLeader([FromForm] SlashRequest body)

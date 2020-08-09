@@ -1,36 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace JoinTheQueue.Core.Dto
 {
     public class SlashRequest
     {
         public string Token { get; set; }
-
-        public string Team_Id { get; set; }
-
-        public string Team_Domain { get; set; }
-
-        public string Enterprise_Id { get; set; }
-
-        public string Enterprise_Name { get; set; }
-
-        public string Channel_Id { get; set; }
-
-        public string Channel_Name { get; set; }
-
-        public string User_Id { get; set; }
-
-        public string User_Name { get; set; }
-
-        public string Command { get; set; }
-
-        public string Text { get; set; }
-
-        public string Response_Url { get; set; }
-
-        public string Trigger_Id { get; set; }
+        [JsonProperty("Team_Id")] public string TeamId { get; set; }
+        [JsonProperty("Team_Domain")] public string TeamDomain { get; set; }
+        [JsonProperty("Enterprise_id")] public string EnterpriseId { get; set; }
+        [JsonProperty("Enterprise_Name")] public string EnterpriseName { get; set; }
+        [JsonProperty("Channel_Id")] public string ChannelId { get; set; }
+        [JsonProperty("Channel_Name")] public string ChannelName { get; set; }
+        [JsonProperty("User_Id")] public string UserId { get; set; }
+        [JsonProperty("User_Name")] public string UserName { get; set; }
+        [JsonProperty("Command")] public string Command { get; set; }
+        [JsonProperty("Text")] public string Text { get; set; }
+        [JsonProperty("Response_Url")] public string ResponseUrl { get; set; }
+        [JsonProperty("Trigger_Id")] public string TriggerId { get; set; }
     }
 }

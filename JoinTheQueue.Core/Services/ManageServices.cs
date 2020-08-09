@@ -8,7 +8,6 @@ namespace JoinTheQueue.Core.Services
     public interface IManageServices
     {
         Task<SlackResponseDto> CreateQueueForChannel(SlashRequest request);
-
     }
 
     public class ManageServices : IManageServices
@@ -40,8 +39,9 @@ namespace JoinTheQueue.Core.Services
 
             return new SlackResponseDto
             {
+                text = "test",
                 response_type = BasicResponseTypes.in_channel,
-                text = JsonConvert.SerializeObject(block)
+                blocks = block.blocks
             };
         }
 
@@ -49,15 +49,15 @@ namespace JoinTheQueue.Core.Services
         {
             return new QueueBlockDto
             {
-                Blocks = new Block[]
+                blocks = new Block[]
                 {
                     new Block
                     {
-                        Type = BlockTypes.Section,
-                        Text = new BlockText
+                        type = BlockTypes.section,
+                        text = new BlockText
                         {
-                            Type = TextTypes.Mrkdwn,
-                            Text = "Hello"
+                            type = TextTypes.mrkdwn,
+                            text = "Hello"
                         }
                     }
                 }

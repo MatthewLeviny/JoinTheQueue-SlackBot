@@ -2,6 +2,6 @@
 {
     public enum TextTypes
     {
-        Mrkdwn
+        mrkdwn
     }
 }
