@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using JoinTheQueue.Core.Repository;
 using JoinTheQueue.Core.Services;
 using JoinTheQueue.Infrastructure.Database;

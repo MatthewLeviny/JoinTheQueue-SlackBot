@@ -38,8 +38,8 @@ namespace JoinTheQueue.Test.Services
             //act
             var response = await ClassUnderTest.JoinQueue(request);
             //assert
-            response.response_type.Should().Be(expectedResponse.response_type);
-            response.text.Should().Be(expectedResponse.text);
+            response.ResponseType.Should().Be(expectedResponse.ResponseType);
+            response.Text.Should().Be(expectedResponse.Text);
         }
 
         [Theory]
@@ -67,8 +67,8 @@ namespace JoinTheQueue.Test.Services
             //act
             var response = await ClassUnderTest.LeaveQueue(request);
             //assert
-            response.response_type.Should().Be(expectedResponse.response_type);
-            response.text.Should().Be(expectedResponse.text);
+            response.ResponseType.Should().Be(expectedResponse.ResponseType);
+            response.Text.Should().Be(expectedResponse.Text);
         }
 
         public static IEnumerable<object[]> RequestAndResponseJoin()
@@ -78,13 +78,13 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    Channel_Id = "123",
-                    Enterprise_Id = "123"
+                    ChannelId = "123",
+                    EnterpriseId = "123"
                 },
                 new SlackResponseDto
                 {
-                    text = "Queue Does not exist",
-                    response_type = BasicResponseTypes.ephemeral
+                    Text = "Queue Does not exist",
+                    ResponseType = BasicResponseTypes.ephemeral
                 },
                 //databaseResponseGet
                 null,
@@ -96,14 +96,14 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    Channel_Id = "123",
-                    Enterprise_Id = "123",
-                    User_Id = "123"
+                    ChannelId = "123",
+                    EnterpriseId = "123",
+                    UserId = "123"
                 },
                 new SlackResponseDto
                 {
-                    text = "@123 has joined the queue",
-                    response_type = BasicResponseTypes.in_channel
+                    Text = "@123 has joined the queue",
+                    ResponseType = BasicResponseTypes.in_channel
                 },
                 //databaseResponseGet
                 new QueueDto
@@ -127,13 +127,13 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    Channel_Id = "123",
-                    Enterprise_Id = "123"
+                    ChannelId = "123",
+                    EnterpriseId = "123"
                 },
                 new SlackResponseDto
                 {
-                    text = "Queue Does not exist",
-                    response_type = BasicResponseTypes.ephemeral
+                    Text = "Queue Does not exist",
+                    ResponseType = BasicResponseTypes.ephemeral
                 },
                 //databaseResponseGet
                 null,
@@ -145,15 +145,15 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    Channel_Id = "123",
-                    Enterprise_Id = "123",
-                    User_Id = "123"
+                    ChannelId = "123",
+                    EnterpriseId = "123",
+                    UserId = "123"
                 },
                 new SlackResponseDto
                 {
-                    text = $"@123 has left the queue" + "\n" +
+                    Text = $"@123 has left the queue" + "\n" +
                            $"@321 ITS GO TIME",
-                    response_type = BasicResponseTypes.in_channel
+                    ResponseType = BasicResponseTypes.in_channel
                 },
                 //databaseResponseGet
                 new QueueDto

@@ -2,7 +2,7 @@
 {
     public enum ElementTypes
     {
-        Button,
-        Overflow
+        button,
+        overflow
     }
 }

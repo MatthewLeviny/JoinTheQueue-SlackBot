@@ -24,35 +24,35 @@ namespace JoinTheQueue.Core.Services
         public async Task<SlackResponseDto> JoinQueue(SlashRequest request)
         {
             //get current queue
-            var queue = await _queueDatabase.GetQueue(request.Channel_Id, request.Enterprise_Id);
+            var queue = await _queueDatabase.GetQueue(request.ChannelId, request.EnterpriseId);
             if (queue == null)
             {
                 return new SlackResponseDto
                 {
-                    text = "Queue Does not exist",
-                    response_type = BasicResponseTypes.ephemeral
+                    Text = "Queue Does not exist",
+                    ResponseType = BasicResponseTypes.ephemeral
                 };
             }
 
-            queue.Queue.Enqueue(request.User_Id);
+            queue.Queue.Enqueue(request.UserId);
             await _queueDatabase.UpdateQueue(queue);
             return new SlackResponseDto
             {
-                text = $"@{request.User_Id} has joined the queue",
-                response_type = BasicResponseTypes.in_channel
+                Text = $"@{request.UserId} has joined the queue",
+                ResponseType = BasicResponseTypes.in_channel
             };
         }
 
         public async Task<SlackResponseDto> LeaveQueue(SlashRequest request)
         {
             //get current queue
-            var queue = await _queueDatabase.GetQueue(request.Channel_Id, request.Enterprise_Id);
+            var queue = await _queueDatabase.GetQueue(request.ChannelId, request.EnterpriseId);
             if (queue == null)
             {
                 return new SlackResponseDto
                 {
-                    text = "Queue Does not exist",
-                    response_type = BasicResponseTypes.ephemeral
+                    Text = "Queue Does not exist",
+                    ResponseType = BasicResponseTypes.ephemeral
                 };
             }
 
@@ -61,9 +61,9 @@ namespace JoinTheQueue.Core.Services
 
             return new SlackResponseDto
             {
-                text = $"@{leaver} has left the queue" + "\n" +
+                Text = $"@{leaver} has left the queue" + "\n" +
                        $"@{queue.Queue.Peek()} ITS GO TIME",
-                response_type = BasicResponseTypes.in_channel
+                ResponseType = BasicResponseTypes.in_channel
             };
         }
 

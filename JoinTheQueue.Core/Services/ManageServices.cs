@@ -34,14 +34,14 @@ namespace JoinTheQueue.Core.Services
             var hookResult = true; //await _webHookService.TriggerWebHook(request.Response_Url, block);
             if (hookResult)
             {
-                message = $"Queue has been added to {request.Channel_Id}";
+                message = $"Queue has been added to {request.ChannelId}";
             }
 
             return new SlackResponseDto
             {
-                text = "test",
-                response_type = BasicResponseTypes.in_channel,
-                blocks = block.blocks
+                Text = "test",
+                ResponseType = BasicResponseTypes.in_channel,
+                Blocks = block.Blocks
             };
         }
 
@@ -49,12 +49,12 @@ namespace JoinTheQueue.Core.Services
         {
             return new QueueBlockDto
             {
-                blocks = new Block[]
+                Blocks = new Block[]
                 {
                     new Block
                     {
-                        type = BlockTypes.section,
-                        text = new BlockText
+                        Type = BlockTypes.section,
+                        Text = new BlockText
                         {
                             type = TextTypes.mrkdwn,
                             text = "Hello"

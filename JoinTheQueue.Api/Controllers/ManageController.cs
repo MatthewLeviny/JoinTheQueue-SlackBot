@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using JoinTheQueue.Core.Authentication;
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
 using Microsoft.AspNetCore.Mvc;
