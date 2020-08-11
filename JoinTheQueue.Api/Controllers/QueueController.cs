@@ -14,6 +14,8 @@ namespace JoinTheQueue.Api.Controllers
     [Route("api/{v:apiVersion}/[controller]")]
     [Produces("application/json")]
     [Consumes("application/x-www-form-urlencoded")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ApiController]
     [RequestAuth]
     public class QueueController : ControllerBase
@@ -27,18 +29,23 @@ namespace JoinTheQueue.Api.Controllers
 
         [HttpPost]
         [Route("Join")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> JoinTheQueue([FromForm] SlashRequest body)
         {
             var returnMessage = await _queueServices.JoinQueue(body);
             return Ok(returnMessage);
         }
 
+
+        [HttpPost]
+        [Route("Show")]
+        public async Task<IActionResult> ShowTheQueue([FromForm] SlashRequest body)
+        {
+            var returnMessage = await _queueServices.ShowCurrentQueue(body);
+            return Ok(returnMessage);
+        }
+
         [HttpPost]
         [Route("Leave")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LeaveTheQueue([FromForm] SlashRequest body)
         {
             var returnMessage = await _queueServices.LeaveQueue(body);
@@ -47,8 +54,6 @@ namespace JoinTheQueue.Api.Controllers
 
         [HttpPost]
         [Route("Nudge")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> NudgeTheLeader([FromForm] SlashRequest body)
         {
             var returnMessage = await _queueServices.NudgeTheLeader(body);

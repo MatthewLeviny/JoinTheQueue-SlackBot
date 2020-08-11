@@ -2,6 +2,7 @@
 {
     public enum TextTypes
     {
-        mrkdwn
+        mrkdwn,
+        plain_text
     }
 }

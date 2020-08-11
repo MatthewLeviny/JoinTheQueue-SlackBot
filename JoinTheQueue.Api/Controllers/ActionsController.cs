@@ -12,8 +12,9 @@ namespace JoinTheQueue.Api.Controllers
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/{v:apiVersion}/[controller]")]
+    [Consumes("application/x-www-form-urlencoded")]
     [ApiController]
-    [RequestAuth]
+    //[RequestAuth]
     public class ActionsController : ControllerBase
     {
         private readonly IQueueServices _queueServices;
@@ -24,15 +25,13 @@ namespace JoinTheQueue.Api.Controllers
         }
 
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
-        [Route("Nudge")]
-        [Produces("application/json")]
+        //[Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> NudgeTheLeader([FromForm] SlashRequest body)
+        public async Task<IActionResult> JoinTheQueue([FromForm] InteractionRequest body)
         {
-            var returnMessage = await _queueServices.NudgeTheLeader(body);
-            return Ok(returnMessage);
+            //var returnMessage = await _queueServices.JoinQueue(body);
+            return Ok();
         }
     }
 }

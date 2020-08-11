@@ -12,14 +12,14 @@ namespace JoinTheQueue.Api.Controllers
     [ApiVersion("1.0")]
     [Route("api/{v:apiVersion}/[controller]")]
     [ApiController]
-    [RequestAuth]
+   // [RequestAuth]
     public class ManageController : Controller
     {
         private readonly IManageServices _manageServices;
 
         public ManageController(IManageServices manageServices)
         {
-            this._manageServices = manageServices;
+            _manageServices = manageServices;
         }
 
         [HttpPost]

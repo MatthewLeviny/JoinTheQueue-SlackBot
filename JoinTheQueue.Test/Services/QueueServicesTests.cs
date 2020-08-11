@@ -78,8 +78,8 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    ChannelId = "123",
-                    EnterpriseId = "123"
+                    Channel_Id = "123",
+                    Enterprise_Id = "123"
                 },
                 new SlackResponseDto
                 {
@@ -96,9 +96,9 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    ChannelId = "123",
-                    EnterpriseId = "123",
-                    UserId = "123"
+                    Channel_Id = "123",
+                    Enterprise_Id = "123",
+                    User_Id = "123"
                 },
                 new SlackResponseDto
                 {
@@ -127,8 +127,8 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    ChannelId = "123",
-                    EnterpriseId = "123"
+                    Channel_Id = "123",
+                    Enterprise_Id = "123"
                 },
                 new SlackResponseDto
                 {
@@ -145,9 +145,9 @@ namespace JoinTheQueue.Test.Services
             {
                 new SlashRequest
                 {
-                    ChannelId = "123",
-                    EnterpriseId = "123",
-                    UserId = "123"
+                    Channel_Id = "123",
+                    Enterprise_Id = "123",
+                    User_Id = "123"
                 },
                 new SlackResponseDto
                 {
@@ -168,6 +168,7 @@ namespace JoinTheQueue.Test.Services
                     Queue = new Queue<string>(new List<string> {"321"})
                 }
             };
+            // TODO - Already in the queue, Queue does not exist
         }
     }
 }

@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2;
 using JoinTheQueue.Core.Repository;
 using JoinTheQueue.Core.Services;
 using JoinTheQueue.Infrastructure.Database;
@@ -75,12 +76,16 @@ namespace JoinTheQueue.Api
             //http clients
             services.AddHttpClient("WebHook", client => { });
 
+            //AWS
+            services.AddAWSService<IAmazonDynamoDB>();
+
             //Options Files
             // services.AddSingleton<FactOptions, FactOptions>(serviceProvider => Configuration.GetSection(nameof(FactOptions)).Get<FactOptions>());
 
             //DI - Core
             services.AddTransient<IManageServices, ManageServices>();
             services.AddTransient<IQueueServices, QueueServices>();
+            services.AddTransient<IBlockCreationService, BlockCreationService>();
             //DI - Infrastructure
             services.AddTransient<IWebHookService, WebHookService>();
             services.AddTransient<IQueueDatabase, QueueDatabase>();
