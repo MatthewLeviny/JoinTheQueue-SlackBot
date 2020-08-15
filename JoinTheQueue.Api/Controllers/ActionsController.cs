@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using JoinTheQueue.Core.Authentication;
 using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace JoinTheQueue.Api.Controllers
 {
@@ -17,20 +19,21 @@ namespace JoinTheQueue.Api.Controllers
     //[RequestAuth]
     public class ActionsController : ControllerBase
     {
-        private readonly IQueueServices _queueServices;
+        private readonly IActionServiceFactory _factory;
 
-        public ActionsController(IQueueServices queueServices)
+        public ActionsController(IActionServiceFactory factory)
         {
-            _queueServices = queueServices;
+            _factory = factory;
         }
 
         [HttpPost]
-        //[Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> JoinTheQueue([FromForm] InteractionRequest body)
+        public async Task<IActionResult> Action([FromForm] string payload)
         {
-            //var returnMessage = await _queueServices.JoinQueue(body);
+            var request = JsonConvert.DeserializeObject<Root>(payload);
+            var actionService = _factory.GetActionService(request.actions.First().value);
+            await actionService.PerformAction(request);
             return Ok();
         }
     }

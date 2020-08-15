@@ -13,5 +13,9 @@ namespace JoinTheQueue.Core.Dto
         public string Text { get; set; }
         [JsonProperty("blocks")]
         public Block[] Blocks { get; set; }
+        [JsonProperty("replace_original")]
+        public bool ReplaceOriginal { get; set; }
+        [JsonProperty("delete_original")]
+        public bool DeleteOriginal { get; set; }
     }
 }

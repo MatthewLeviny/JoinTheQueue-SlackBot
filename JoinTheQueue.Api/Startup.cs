@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using JoinTheQueue.Core.Repository;
 using JoinTheQueue.Core.Services;
+using JoinTheQueue.Core.Services.Actions;
 using JoinTheQueue.Infrastructure.Database;
 using JoinTheQueue.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -84,8 +85,10 @@ namespace JoinTheQueue.Api
 
             //DI - Core
             services.AddTransient<IManageServices, ManageServices>();
-            services.AddTransient<IQueueServices, QueueServices>();
             services.AddTransient<IBlockCreationService, BlockCreationService>();
+            services.AddTransient<IActionServiceFactory, ActionServiceFactory>();
+            services.AddTransient<IActionService, JoinActionService>();
+            services.AddTransient<IActionService, LeaveActionService>();
             //DI - Infrastructure
             services.AddTransient<IWebHookService, WebHookService>();
             services.AddTransient<IQueueDatabase, QueueDatabase>();

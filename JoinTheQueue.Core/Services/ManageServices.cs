@@ -11,7 +11,6 @@ namespace JoinTheQueue.Core.Services
     public interface IManageServices
     {
         Task<SlackResponseDto> CreateQueueForChannel(SlashRequest request);
-
     }
 
     public class ManageServices : IManageServices
@@ -36,6 +35,7 @@ namespace JoinTheQueue.Core.Services
             string message;
 
             //output queue to channel
+            QueueBlockDto blocks;
             if (currentQueue == null)
             {
                 currentQueue = new QueueDto
@@ -50,10 +50,17 @@ namespace JoinTheQueue.Core.Services
             }
             else
             {
+                blocks = await _blockCreationService.CurrentQueue(currentQueue);
                 message = $"Queue Already exists: {currentQueue.Name}";
+                return new SlackResponseDto
+                {
+                    Text = message,
+                    ResponseType = BasicResponseTypes.in_channel,
+                    Blocks = blocks.Blocks
+                };
             }
 
-            var blocks = await _blockCreationService.CurrentQueue(currentQueue);
+            blocks = await _blockCreationService.CurrentQueue(currentQueue);
             return new SlackResponseDto
             {
                 Text = message,
