@@ -37,7 +37,7 @@ namespace JoinTheQueue.Core.Services.Actions
 
             if (queue.Queue.Any())
             {
-                var responseConfirmation = new SlackResponseDto()
+                var responseConfirmation = new SlackResponseDto
                 {
                     Text = $"Nudging @{queue.Queue.Peek()}",
                     ResponseType = BasicResponseTypes.in_channel,
@@ -57,9 +57,9 @@ namespace JoinTheQueue.Core.Services.Actions
                 return;
             }
 
-            var responseEmpty = new SlackResponseDto()
+            var responseEmpty = new SlackResponseDto
             {
-                Text = $"Queue is empty",
+                Text = "Queue is empty",
                 ResponseType = BasicResponseTypes.ephemeral,
                 DeleteOriginal = true,
             };

@@ -89,6 +89,7 @@ namespace JoinTheQueue.Api
             services.AddTransient<IActionServiceFactory, ActionServiceFactory>();
             services.AddTransient<IActionService, JoinActionService>();
             services.AddTransient<IActionService, LeaveActionService>();
+            services.AddTransient<IActionService, NudgeAction>();
             //DI - Infrastructure
             services.AddTransient<IWebHookService, WebHookService>();
             services.AddTransient<IQueueDatabase, QueueDatabase>();
