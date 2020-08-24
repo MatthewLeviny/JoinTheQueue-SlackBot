@@ -39,6 +39,20 @@ namespace JoinTheQueue.Core.Services.Actions
                 return;
             }
 
+            if (!queue.Queue.Contains(request.user.username))
+            {
+                var responseNotInQueue = new SlackResponseDto()
+                {
+                    Text = "you're not in the queue numpty",
+                    ResponseType = BasicResponseTypes.ephemeral,
+                    DeleteOriginal = false,
+
+                };
+
+                await _hookService.TriggerWebHook(request.response_url, responseNotInQueue);
+                return;
+            }
+
             var leaver = request.user.username;
             queue.Queue = new Queue<string>(queue.Queue.Where(x => x != leaver));
             await _queueDatabase.UpdateQueue(queue);
