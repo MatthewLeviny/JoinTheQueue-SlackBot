@@ -17,9 +17,9 @@ namespace JoinTheQueue.Core.Dto
 
     public class BlockElement
     {
-        [JsonProperty("type")] public ElementTypes Type { get; set; }
+        [JsonProperty("type")] public ElementTypes? Type { get; set; }
         [JsonProperty("text")] public BlockText Text { get; set; }
-        [JsonProperty("options")] public BlockText[] Options { get; set; }
+        [JsonProperty("options")] public BlockElement[] Options { get; set; }
         [JsonProperty("value")] public string Value { get; set; }
     }
 

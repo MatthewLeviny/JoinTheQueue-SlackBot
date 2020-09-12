@@ -25,7 +25,7 @@ namespace JoinTheQueue.Test.Services.ActionTests
 
         [Theory]
         [MemberData(nameof(RequestAndResponseJoin))]
-        public async Task JoinQueue(Root request,
+        public async Task LeaveQueue(Root request,
             QueueDto databaseResponseGet, QueueDto databaseResponseUpdate, ResponseCount responseCount)
         {
             //arrange
@@ -51,6 +51,7 @@ namespace JoinTheQueue.Test.Services.ActionTests
 
             //act
             await ClassUnderTest.PerformAction(request);
+
             //assert
             Mock.Get(Get<IQueueDatabase>()).Verify(mock => mock.GetQueue(It.IsAny<string>(), It.IsAny<string>()),
                 Times.Exactly(responseCount.QueueGet));
@@ -112,8 +113,8 @@ namespace JoinTheQueue.Test.Services.ActionTests
                 new ResponseCount
                 {
                     QueueGet = 1,
-                    QueueUpdate = 1,
-                    WebService = 2
+                    QueueUpdate = 0,
+                    WebService = 1
                 }
             };
             //happy remove user

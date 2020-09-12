@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using JoinTheQueue.Core.Dto;
-using JoinTheQueue.Core.Enum;
 using JoinTheQueue.Core.Repository;
 using JoinTheQueue.Core.Services;
 using JoinTheQueue.Core.Services.Actions;

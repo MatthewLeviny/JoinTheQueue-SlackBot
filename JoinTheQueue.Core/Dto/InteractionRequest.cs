@@ -75,6 +75,7 @@ namespace JoinTheQueue.Core.Dto
         public string block_id { get; set; }
         public Text3 text { get; set; }
         public string value { get; set; }
+        public BlockElement selected_option { get; set; }
         public string type { get; set; }
         public string action_ts { get; set; }
     }

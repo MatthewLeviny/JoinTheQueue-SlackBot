@@ -69,14 +69,29 @@ namespace JoinTheQueue.Core.Services
                                     Text = "Leave"
                                 },
                                 Value = "LeaveAction"
+                            },
+                            new BlockElement
+                            {
+                                Type = ElementTypes.overflow,
+                                Options = new BlockElement[]
+                                {
+                                    new BlockElement
+                                    {
+                                        Type = null,
+                                        Text = new BlockText
+                                        {
+                                            Type = TextTypes.plain_text,
+                                            Text = "Nudge the Leader"
+                                        },
+                                        Value = "NudgeAction"
+                                    }
+                                }
                             }
                         }
                     }
                 }
             };
-
             var queueAsText = "";
-
             foreach (var person in queue.Queue)
             {
                 queueAsText += $"@{person}";

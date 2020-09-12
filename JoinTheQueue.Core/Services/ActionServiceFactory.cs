@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using JoinTheQueue.Core.Dto;
 using JoinTheQueue.Core.Services.Actions;
 
 namespace JoinTheQueue.Core.Services
 {
     public interface IActionServiceFactory
     {
-        IActionService GetActionService(string action);
+        IActionService GetActionService(Action action);
     }
 
     public class ActionServiceFactory : IActionServiceFactory
@@ -19,9 +19,11 @@ namespace JoinTheQueue.Core.Services
             _actions = actions;
         }
 
-        public IActionService GetActionService(string action)
+        public IActionService GetActionService(Action action)
         {
-            return _actions.FirstOrDefault(x => x.Key == action);
+            return action.value == null
+                ? _actions.FirstOrDefault(x => x.Key == action.selected_option.Value)
+                : _actions.FirstOrDefault(x => x.Key == action.value);
         }
     }
 }

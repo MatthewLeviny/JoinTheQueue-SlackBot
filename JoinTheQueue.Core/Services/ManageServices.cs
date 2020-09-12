@@ -15,14 +15,14 @@ namespace JoinTheQueue.Core.Services
 
     public class ManageServices : IManageServices
     {
-        private readonly IWebHookService _webHookService;
+        private readonly IWebHookService _hookService;
         private readonly IBlockCreationService _blockCreationService;
         private readonly IQueueDatabase _queueDatabase;
 
-        public ManageServices(IWebHookService webHookService, IBlockCreationService blockCreationService,
+        public ManageServices(IWebHookService hookService, IBlockCreationService blockCreationService,
             IQueueDatabase queueDatabase)
         {
-            _webHookService = webHookService;
+            _hookService = hookService;
             _blockCreationService = blockCreationService;
             _queueDatabase = queueDatabase;
         }
@@ -61,11 +61,19 @@ namespace JoinTheQueue.Core.Services
             }
 
             blocks = await _blockCreationService.CurrentQueue(currentQueue);
+            var responseNudge = new SlackResponseDto()
+            {
+                ResponseType = BasicResponseTypes.ephemeral,
+                DeleteOriginal = true,
+                Blocks = blocks.Blocks
+            };
+
+            await _hookService.TriggerWebHook(request.Response_Url, responseNudge);
+
             return new SlackResponseDto
             {
-                Text = message,
-                ResponseType = BasicResponseTypes.in_channel,
-                Blocks = blocks.Blocks
+                Text = "Here's the queue",
+                ResponseType = BasicResponseTypes.ephemeral
             };
         }
     }

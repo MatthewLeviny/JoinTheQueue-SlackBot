@@ -16,7 +16,7 @@ namespace JoinTheQueue.Api.Controllers
     [Route("api/{v:apiVersion}/[controller]")]
     [Consumes("application/x-www-form-urlencoded")]
     [ApiController]
-    //[RequestAuth]
+    [RequestAuth]
     public class ActionsController : ControllerBase
     {
         private readonly IActionServiceFactory _factory;
@@ -32,7 +32,7 @@ namespace JoinTheQueue.Api.Controllers
         public async Task<IActionResult> Action([FromForm] string payload)
         {
             var request = JsonConvert.DeserializeObject<Root>(payload);
-            var actionService = _factory.GetActionService(request.actions.First().value);
+            var actionService = _factory.GetActionService(request.actions.First());
             await actionService.PerformAction(request);
             return Ok();
         }

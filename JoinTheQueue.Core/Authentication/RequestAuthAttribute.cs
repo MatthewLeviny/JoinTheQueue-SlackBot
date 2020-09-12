@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
 
 namespace JoinTheQueue.Core.Authentication
 {
@@ -34,11 +34,7 @@ namespace JoinTheQueue.Core.Authentication
             }
 
             context.HttpContext.Request.Headers.TryGetValue(SlackTimestampHeaderName, out var slackRequestTimestamp);
-            string requestBody;
-            using (var reader = new StreamReader(context.HttpContext.Request.Body))
-            {
-                requestBody = await reader.ReadToEndAsync();
-            }
+            string requestBody = JsonConvert.SerializeObject(context.HttpContext.Request.Form) ?? string.Empty;
 
             var slackSigningKey = configuration.GetSection(SlackHeaderName).Value;
 
