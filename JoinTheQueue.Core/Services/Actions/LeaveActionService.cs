@@ -46,7 +46,6 @@ namespace JoinTheQueue.Core.Services.Actions
                     Text = "you're not in the queue numpty",
                     ResponseType = BasicResponseTypes.ephemeral,
                     DeleteOriginal = false,
-
                 };
 
                 await _hookService.TriggerWebHook(request.response_url, responseNotInQueue);
@@ -54,6 +53,7 @@ namespace JoinTheQueue.Core.Services.Actions
             }
 
             var leaver = request.user.username;
+            var wasFirst = queue.Queue.Peek().Equals(leaver);
             queue.Queue = new Queue<string>(queue.Queue.Where(x => x != leaver));
             await _queueDatabase.UpdateQueue(queue);
 
@@ -67,7 +67,7 @@ namespace JoinTheQueue.Core.Services.Actions
             await _hookService.TriggerWebHook(request.response_url, responseWebHook);
 
             var text = $"@{request.user.name} has left the queue" + "\n";
-            text += queue.Queue.Any() ? $"@{queue.Queue.Peek()} ITS GO TIME" : "Queue is empty";
+            if (wasFirst) text += queue.Queue.Any() ? $"@{queue.Queue.Peek()} ITS GO TIME" : "Queue is empty";
 
             var slackMessage = new SlackResponseDto
             {

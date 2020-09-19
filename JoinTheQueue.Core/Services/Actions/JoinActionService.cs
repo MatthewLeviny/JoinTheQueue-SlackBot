@@ -73,8 +73,8 @@ namespace JoinTheQueue.Core.Services.Actions
                     Text = "Queue",
                     ResponseType = BasicResponseTypes.in_channel,
                     Blocks = queueBlock.Blocks,
-                    DeleteOriginal = false,
-                    ReplaceOriginal = true
+                    DeleteOriginal = true,
+                    ReplaceOriginal = false
                 };
                 await _hookService.TriggerWebHook(request.response_url, responseJoinBlock);
 
