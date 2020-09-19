@@ -33,5 +33,12 @@ namespace JoinTheQueue.Api.Controllers
             var returnMessage = await _manageServices.CreateQueueForChannel(body);
             return Ok(returnMessage);
         }
+
+        [HttpGet]
+        [Route("Healthcheck")]
+        public async Task<IActionResult> HealthCheck()
+        {
+            return Ok("Hello");
+        }
     }
 }

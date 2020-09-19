@@ -1,5 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Amazon.Lambda.Core;
+using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.RuntimeSupport;
+using Amazon.Lambda.Serialization.Json;
 
 namespace JoinTheQueue.Api
 {
@@ -7,14 +17,27 @@ namespace JoinTheQueue.Api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JoinTheQueue")))
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            else
+            {
+                var lambdaEntry = new LambdaEntryPoint();
+                var functionHandler =
+                    (Func<APIGatewayProxyRequest, ILambdaContext, Task<APIGatewayProxyResponse>>) (lambdaEntry
+                        .FunctionHandlerAsync);
+                using (var handlerWrapper = HandlerWrapper.GetHandlerWrapper(functionHandler, new JsonSerializer()))
+                using (var bootstrap = new LambdaBootstrap(handlerWrapper))
+                {
+                    bootstrap.RunAsync().Wait();
+                }
+            }
         }
+
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

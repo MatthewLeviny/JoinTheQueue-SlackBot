@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace JoinTheQueue.Api
 {
-    public class LambdaFunction : APIGatewayProxyFunction
+    public class LambdaEntryPoint : APIGatewayProxyFunction
     {
         protected override void Init(IWebHostBuilder builder)
         {
