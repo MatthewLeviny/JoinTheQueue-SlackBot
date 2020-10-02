@@ -90,6 +90,7 @@ namespace JoinTheQueue.Api
             services.AddTransient<IActionService, JoinActionService>();
             services.AddTransient<IActionService, LeaveActionService>();
             services.AddTransient<IActionService, NudgeAction>();
+            services.AddTransient<IActionService, RenameActionService>();
             //DI - Infrastructure
             services.AddTransient<IWebHookService, WebHookService>();
             services.AddTransient<IQueueDatabase, QueueDatabase>();
@@ -114,7 +115,7 @@ namespace JoinTheQueue.Api
                 c.RoutePrefix = string.Empty;
             });
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors();
